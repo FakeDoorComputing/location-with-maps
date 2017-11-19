@@ -1,8 +1,7 @@
 // add event listeners for pause and resume
+/*
 document.addEventListener("resume", onResume, false);
 document.addEventListener("pause", onPause, false);
-
-var map;
 
 function onPause(){
 }
@@ -11,12 +10,12 @@ function onResume(){
 }
 
 //when the jQuery Mobile page is initialised
-$(document).on('pageinit', function() {
+/*$(document).on('pageinit', function() {
 	initMap();
-});
+});*/
 
 //Call this function when you want to get the current position
-function getPosition() {
+/*function getPosition() {
 
 	//navigator.geolocation.clearWatch(watchID);
 
@@ -27,10 +26,30 @@ function getPosition() {
 
 function locateMe(lat,long,time,alti){
 }
-
+*/
 function initMap(){
-	map = new google.maps.Map(document.getElementById('map'), {
-  	center: {lat: -34.397, lng: 150.644},
-    zoom: 8
+	var markers=[
+		['Home',52.110,-2.305,1],
+		['Station',52.109,-2.318,2],
+		['Work',52.111,-2.327,3],
+		['Police',52.115,-2.325,4],
+		['Morrisons',52.131,-2.303,5]
+	]
+	var location={lat:52.110,lng:-2.305};
+	var map = new google.maps.Map(document.getElementById('map'), {
+  	center: location,
+    zoom: 12,
+		mapTypeId: 'terrain'
   });
+
+	for(i=0;i<markers.length;i++){
+		var mark=markers[i];
+		var marker=new google.maps.Marker({
+			position: {lat: mark[1], lng: mark[2]},
+			map:map,
+			title:mark[0],
+			zIndex:mark[3],
+			draggable:true
+		});
+	};
 }
